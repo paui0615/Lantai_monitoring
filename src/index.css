@@ -1,0 +1,66 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.map-container {
+  height: 500px;
+  width: 750px;
+
+  }
+   
+.sidebar {
+    background-color: rgba(35, 55, 75, 0.9);
+    color: #fff;
+    padding: 6px 12px;
+    font-family: monospace;
+    z-index: 1;
+    position: absolute;
+    top: 200;
+    right: 300;
+    padding-top: 300;
+    border-radius: 4px;
+}
+.leftbox{
+  width: 600px;
+}
+
+.source-legend-colorbar {
+  width: 100%;
+  height: 20px;
+  background: linear-gradient(to right, rgb(0,0,128), rgb(0, 77, 255), rgb(41, 255, 206), rgb(206, 255, 41), rgb(255, 104, 0), rgb(128,0,0));
+  margin-bottom:20px;
+  position: relative;
+}
+.source-colorbar-mark {
+  position: absolute;
+  font-size: 16px;
+  top: 20px;
+  transform: translateX(-50%);
+}
+
+.source-color-label {
+  font-family: 'Mukta', sans-serif;
+  font-size: 18px;
+  font-weight: bold;
+  display: flex;
+  /* 水平置中 */
+  justify-content: center;   
+}
+
+.button-text {
+  font-family: 'Mukta', sans-serif;
+  font-weight: bold;
+  /* 水平置中 */
+  display: flex;
+  justify-content: center;   
+}
