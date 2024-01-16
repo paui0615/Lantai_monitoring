@@ -249,7 +249,8 @@ socketio = SocketIO(app, cors_allowed_origins="*")
 @app.route('/')
 @cross_origin(origins=['*'])
 def index():
-    return "testfsafgg"
+    return "test"
+
 @socketio.on('random_data',namespace='/')
 def send_rawdata():
 
@@ -260,9 +261,9 @@ def send_rawdata():
 
     args = parser.parse_args()
 
-    args.seedlink_streams = "TW_LT01:00HHE,TW_LT03:00HHE,TW_LT04:00HHE,TW_LT05:00HHE,TW_LT06:00HHE,TW_LT07:00HHE,TW_LT08:00HHE,TW_LT09:00HHE,TW_LT10:00HHE"
+    args.seedlink_streams = "streams name"
     args.backtrace_time = _parse_time_with_suffix_to_seconds("2m")
-    args.seedlink_server = "192.168.20.1:18000"
+    args.seedlink_server = "ip"
     args.update_time = _parse_time_with_suffix_to_seconds("10s")
 
 
@@ -301,21 +302,17 @@ def send_rawdata():
     while True:
         try:
             st = streams.trimmer()
-            print(st)
             if not bool(st):
                 pass
-
-
             st.resample(samp_rate)
             st.detrend("demean")
-            #print(st)
-            out_dic=[]
-            sta_list=[]
 
             times=st[0].times("utcdatetime")
             start_date=times[0]
             end_date=start_date+timespan
             utc_datetimes = []
+            out_dic=[]
+            sta_list=[]
             while start_date < end_date:
                 utc_datetimes.append(start_date)
                 start_date += delta
@@ -326,12 +323,11 @@ def send_rawdata():
                 stdata=list(st[j].data)
                 if len(stdata) < totalnum:
                     diff = totalnum - len(stdata)
-                    stdata+=int(diff)*[0]
-                    #stdata.extend(int(diff)*[None])                
+                    stdata+=int(diff)*[0]            
                 sta_list.append(st[j].stats.station)
                 globals()['data'+str(j)] = np.float64(stdata)
 
-            #print(data0)
+
             for i in range(len(utc_datetimes)):
                 out_dic.append({'times':str(utc_datetimes[i])})
 
@@ -341,11 +337,12 @@ def send_rawdata():
                         out_dic[i][sta]=globals()['data'+str(j)][i]
                     else:
                         out_dic[i][sta]=str(null)
-            #print(out_dic)
+
             socketio.emit('json', out_dic, broadcast=True)
             time.sleep(10)
         except: 
             pass
+
 if __name__ == '__main__':
     socketio.run(app, port=5000)
         

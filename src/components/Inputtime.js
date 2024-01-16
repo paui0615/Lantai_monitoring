@@ -25,10 +25,8 @@ function Inputtime(props) {
     const [dataseis1, setDataseis1] = useState([])
     const [dataseis2, setDataseis2] = useState([])
     const [dataseis3, setDataseis3] = useState([])
-    
     const starttime=props.timex1
     const endtime=props.timex2
-    console.log(starttime)
 
     function Search(event){
         event.preventDefault();
@@ -60,8 +58,9 @@ function Inputtime(props) {
        })
 
      }
- const dateFormatter = date => {
 
+
+ const dateFormatter = date => {
   return moment(date).format('HH:mm:ss');
 };
 
@@ -77,10 +76,11 @@ const seismax3= Math.max(...dataseis3)*1.2
 const InitializeTick = () => {
   setTimeArray(Arithmetic_Array(timemin,timemax));
 }
+
 useEffect(() => {
   InitializeTick();
 }, []);
-console.log(TimeArray)
+
 
  const [RefArea, setRefArea] = useState({refAreaLeft:"", refAreaRight:"",
     left: "dataMin", right: "dataMax", data: data

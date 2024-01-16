@@ -3,7 +3,7 @@ import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer } fro
 import moment from 'moment';
 import { LineChart, Line,  ReferenceArea } from 'recharts';
 import socket from './socket';
-
+import CustomLineChart from './Stationplot';
 
 const  Arithmetic_Array = (a,b) => {
   let arr = []
@@ -30,7 +30,6 @@ function Realtime() {
   const [data, setData] = useState(null);
 
 
-  //socket.emit('random_data')
   useEffect(() => {
     socket.on('json', (newData) => {
       const epoch = newData.map(item => {
@@ -41,7 +40,6 @@ function Realtime() {
 
       const epoch2 = newData.map(d => d.times= moment(d.times).valueOf())
       setDatatime(epoch2)
-    //  setDatatime(newData.map((data) => data.times));
 
       setDataseis1(newData.map((data) => data.LT01));
       setDataseis2(newData.map((data) => data.LT03));
@@ -102,207 +100,17 @@ useEffect(() => {
 
 return (
   <>
-
-    <h3 className="text-heading">
-        LT01.HHE
-    </h3>
-    <ResponsiveContainer width="99%" height={100}>
-
-
-      <LineChart 
-        data={data} syncId="anyId"
-        margin={{ top: 5, right: 100, left: 20, bottom: 5 }}>    
-
-        <XAxis type="number" dataKey="times"  tickFormatter={dateFormatter}
-          scale="time" angle="20" tickCount="10" domain={[timemin, timemax]}
-          tick={{fontSize: 12, dy:5}} allowDataOverflow={true}
-        />
-      
-        <YAxis type="number" dataKey="LT01"
-          tickFormatter={(value) => Number(value.toFixed(8)).toExponential()}
-          allowDataOverflow={true} domain={[seismin1, seismax1]}
-        />
-
-        <Line type="monotone" dataKey="LT01"  stroke="black" dot={false} animationDuration={300}/>
-      </LineChart>
-      </ResponsiveContainer>
-
-      <h3 className="text-heading">
-        LT03.HHE
-      </h3>
-      <ResponsiveContainer width="99%" height={100}>
-      <LineChart
-        data={data} syncId="anyId"
-        margin={{ top: 5, right: 100, left: 20, bottom: 5 }}>
-        
-        <XAxis type="number" dataKey="times"  tickFormatter={dateFormatter}
-          scale="time"  angle="20" tickCount="10" domain={[timemin, timemax]}
-          tick={{fontSize: 12, dy:5}} allowDataOverflow={true}
-        />
-      
-        <YAxis type="number" dataKey="LT03"
-          tickFormatter={(value) => Number(value.toFixed(8)).toExponential()}
-          allowDataOverflow={true} domain={[seismin2, seismax2]}
-        />
-
-        <Line type="monotone" dataKey="LT03" stroke="black" dot={false} animationDuration={300}/>
-      </LineChart>
-      </ResponsiveContainer>
-
-      <h3 className="text-heading">
-        LT04.HHE
-      </h3>
-      <ResponsiveContainer width="99%" height={100}>
-      <LineChart
-        data={data} syncId="anyId"
-        margin={{ top: 5, right: 100, left: 20, bottom: 5 }}>
-        
-        <XAxis type="number" dataKey="times"  tickFormatter={dateFormatter}
-          scale="time"  angle="20" tickCount="10" domain={[timemin, timemax]}
-          tick={{fontSize: 12, dy:5}} allowDataOverflow={true}
-        />
-      
-        <YAxis type="number" dataKey="LT04"
-          tickFormatter={(value) => Number(value.toFixed(8)).toExponential()}
-          allowDataOverflow={true} domain={[seismin3, seismax3]}
-        />
-
-        <Line type="monotone" dataKey="LT04" stroke="black" dot={false} animationDuration={300}/>
-      </LineChart>
-      </ResponsiveContainer>
-
-      <h3 className="text-heading">
-        LT05.HHE
-      </h3>
-      <ResponsiveContainer width="99%" height={100}>
-      <LineChart
-        data={data} syncId="anyId"
-        margin={{ top: 5, right: 100, left: 20, bottom: 5 }}>
-        
-        <XAxis type="number" dataKey="times"  tickFormatter={dateFormatter}
-          scale="time"  angle="20" tickCount="10" domain={[timemin, timemax]}
-          tick={{fontSize: 12, dy:5}} allowDataOverflow={true}
-        />
-      
-        <YAxis type="number" dataKey="LT05"
-          tickFormatter={(value) => Number(value.toFixed(8)).toExponential()}
-          allowDataOverflow={true} domain={[seismin4, seismax4]}
-        />
-
-        <Line type="monotone" dataKey="LT05" stroke="black" dot={false} animationDuration={300}/>
-      </LineChart>
-      </ResponsiveContainer>
-
-      <h3 className="text-heading">
-        LT06.HHE
-      </h3>
-      <ResponsiveContainer width="99%" height={100}>
-      <LineChart
-        data={data} syncId="anyId"
-        margin={{ top: 5, right: 100, left: 20, bottom: 5 }}>
-        
-        <XAxis type="number" dataKey="times"  tickFormatter={dateFormatter}
-          scale="time"  angle="20" tickCount="10" domain={[timemin, timemax]}
-          tick={{fontSize: 12, dy:5}} allowDataOverflow={true}
-        />
-      
-        <YAxis type="number" dataKey="LT06"
-          tickFormatter={(value) => Number(value.toFixed(8)).toExponential()}
-          allowDataOverflow={true} domain={[seismin5, seismax5]}
-        />
-
-        <Line type="monotone" dataKey="LT06" stroke="black" dot={false} animationDuration={300}/>
-      </LineChart>
-      </ResponsiveContainer>
-
-      <h3 className="text-heading">
-        LT07.HHE
-      </h3>
-      <ResponsiveContainer width="99%" height={100}>
-      <LineChart
-        data={data} syncId="anyId"
-        margin={{ top: 5, right: 100, left: 20, bottom: 5 }}>
-        
-        <XAxis type="number" dataKey="times"  tickFormatter={dateFormatter}
-          scale="time"  angle="20" tickCount="10" domain={[timemin, timemax]}
-          tick={{fontSize: 12, dy:5}} allowDataOverflow={true}
-        />
-      
-        <YAxis type="number" dataKey="LT07"
-          tickFormatter={(value) => Number(value.toFixed(8)).toExponential()}
-          allowDataOverflow={true} domain={[seismin6, seismax6]}
-        />
-
-        <Line type="monotone" dataKey="LT07" stroke="black" dot={false} animationDuration={300}/>
-      </LineChart>
-      </ResponsiveContainer>
-
-      <h3 className="text-heading">
-        LT08.HHE
-      </h3>
-      <ResponsiveContainer width="99%" height={100}>
-      <LineChart
-        data={data} syncId="anyId"
-        margin={{ top: 5, right: 100, left: 20, bottom: 5 }}>
-        
-        <XAxis type="number" dataKey="times"  tickFormatter={dateFormatter}
-          scale="time"  angle="20" tickCount="10" domain={[timemin, timemax]}
-          tick={{fontSize: 12, dy:5}} allowDataOverflow={true}
-        />
-      
-        <YAxis type="number" dataKey="LT08"
-          tickFormatter={(value) => Number(value.toFixed(8)).toExponential()}
-          allowDataOverflow={true} domain={[seismin7, seismax7]}
-        />
-
-        <Line type="monotone" dataKey="LT08" stroke="black" dot={false} animationDuration={300}/>
-      </LineChart>
-      </ResponsiveContainer>
-
-      <h3 className="text-heading">
-        LT09.HHE
-      </h3>
-      <ResponsiveContainer width="99%" height={100}>
-      <LineChart
-        data={data} syncId="anyId"
-        margin={{ top: 5, right: 100, left: 20, bottom: 5 }}>
-        
-        <XAxis type="number" dataKey="times"  tickFormatter={dateFormatter}
-          scale="time"  angle="20" tickCount="10" domain={[timemin, timemax]}
-          tick={{fontSize: 12, dy:5}} allowDataOverflow={true}
-        />
-      
-        <YAxis type="number" dataKey="LT09"
-          tickFormatter={(value) => Number(value.toFixed(8)).toExponential()}
-          allowDataOverflow={true} domain={[seismin8, seismax8]}
-        />
-
-        <Line type="monotone" dataKey="LT09" stroke="black" dot={false} animationDuration={300}/>
-      </LineChart>
-      </ResponsiveContainer>
-      
-      <h3 className="text-heading">
-        LT10.HHE
-      </h3>
-      <ResponsiveContainer width="99%" height={100}>
-      <LineChart
-        data={data} syncId="anyId"
-        margin={{ top: 5, right: 100, left: 20, bottom: 5 }}>
-        
-        <XAxis type="number" dataKey="times"  tickFormatter={dateFormatter}
-          scale="time"  angle="20" tickCount="10" domain={[timemin, timemax]}
-          tick={{fontSize: 12, dy:5}} allowDataOverflow={true}
-        />
-      
-        <YAxis type="number" dataKey="LT10"
-          tickFormatter={(value) => Number(value.toFixed(8)).toExponential()}
-          allowDataOverflow={true} domain={[seismin9, seismax9]}
-        />
-
-        <Line type="monotone" dataKey="LT10" stroke="black" dot={false} animationDuration={300}/>
-      </LineChart>
-      </ResponsiveContainer>
-
+  <div>
+    <CustomLineChart data={data} dataKey="LT01" label="LT01.HHE" seismax={seismax1} seismin={seismin1} />
+    <CustomLineChart data={data} dataKey="LT03" label="LT03.HHE" seismax={seismax2} seismin={seismin2} />
+    <CustomLineChart data={data} dataKey="LT04" label="LT04.HHE" seismax={seismax3} seismin={seismin3} />
+    <CustomLineChart data={data} dataKey="LT05" label="LT05.HHE" seismax={seismax4} seismin={seismin4} />
+    <CustomLineChart data={data} dataKey="LT06" label="LT06.HHE" seismax={seismax5} seismin={seismin5} />
+    <CustomLineChart data={data} dataKey="LT07" label="LT07.HHE" seismax={seismax6} seismin={seismin6} />
+    <CustomLineChart data={data} dataKey="LT08" label="LT08.HHE" seismax={seismax7} seismin={seismin7} />
+    <CustomLineChart data={data} dataKey="LT09" label="LT09.HHE" seismax={seismax8} seismin={seismin8} />
+    <CustomLineChart data={data} dataKey="LT10" label="LT10.HHE" seismax={seismax9} seismin={seismin9} />
+  </div>
   </>
 );
 }

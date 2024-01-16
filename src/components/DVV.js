@@ -30,8 +30,8 @@ const CustomXTick = (props) => {
     const [dvvmax, setDVVmax] = useState()
 
 
-        async function fetchData(){
-        try{
+    async function fetchData(){
+      try{
 
         const response = await fetch("../"+station+"_dvv.json")
         const jsonData = await response.json()
@@ -49,7 +49,7 @@ const CustomXTick = (props) => {
             console.log(error);
         }
       };
-      console.log(dvvmax)
+
 
       useEffect(() => {
          fetchData();
@@ -63,6 +63,7 @@ const CustomXTick = (props) => {
          return () => clearInterval(updateInterval);
       }, [dataIndex]);
     
+      
       if (data === null) {
         return <p>Loading...</p>;
       }
@@ -83,24 +84,20 @@ const CustomXTick = (props) => {
 
       const minTimestamp = get90DaysAgo().toISOString();
       const maxTimestamp = new Date().toISOString();
-
-
       const dateFormatter = date => {
-
         return moment(date).format('YYYY/MM/DD');
       };
       const filteredData = data.filter(point => point.DVV !== null);
-      console.log(filteredData)
-    return (
-        <div>
 
+    return (
+    <div>
       <ResponsiveContainer width="100%" height={100}>
         <LineChart data={data}>
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="Date" type="category"
-        angle="20" tickCount="10" style={{ fontSize: '12px' }}
-        domain={[minTimestamp, maxTimestamp]}
-        tickFormatter={dateFormatter}/>
+            angle="20" tickCount="10" style={{ fontSize: '12px' }}
+            domain={[minTimestamp, maxTimestamp]}
+            tickFormatter={dateFormatter}/>
           <YAxis domain={[dvvmin,dvvmax]} tickFormatter={(value) => value.toFixed(4)}/>
           <Tooltip />
   
