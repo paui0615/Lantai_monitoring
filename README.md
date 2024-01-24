@@ -7,7 +7,7 @@
 ### The `seedlink` module is used to fetch real-time seismic data, the output will be the data stream defined in `obspy` library.
 ### The script `run.py` get the seismic data from importing `seedlink`, and do the pre-processing with obspy. Including demean, resample and zero-fill. Aftering generating processed data, the output will be transferd into json format. By using `socketio`, the 2 minutes real-time data are send to the frontend every 10 seconds.
 ```
-$ python api/run.py --port 5000
+$ python api/run.py
 ```
 ## Calculating seismic velocity change (dv/v) (See citations for details)
 ### In `./Cron_code` folder, The script `get_dvv.py` read the updating data from our server for 11 stations and write as a local json file in `./public`. Linux Crontab is used to daily execute the updating output.
