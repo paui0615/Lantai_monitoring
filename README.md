@@ -22,3 +22,10 @@ $ 0 0 * * * /usr/local/bin/python3.9 ./Cron_code/get_dvv.py
 * Realtime.js: The `socket` module can realize real-time data transmission. The `recharts` library perfroms seismogram figures.
 * Map.js: `mapboxgl` is a map tool to show the Lantai landslide region.
 * DVV.js: `recharts` plots the line figure of seismic velocity changes estimation (dv/v) for different frequency ranges.
+
+# 4. Web display
+![Lantai_monitoring](https://github.com/paui0615/Lantai_monitoring/assets/125962545/b44afa6f-9ff8-4422-8a67-efb336c9e5a1)
+
+
+
+
